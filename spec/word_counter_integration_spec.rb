@@ -2,6 +2,8 @@ class String
 	define_method(:word_counter) do |input_phrase|
 
     instance_count = 0
+    
+    input_phrase.gsub!(/[.,;:"'!?]/, "")
 	  input_phrase_words = input_phrase.split(" ")
 
     input_phrase_words.each() do |word|
