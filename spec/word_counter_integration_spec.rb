@@ -1,19 +1,14 @@
-class String
-	define_method(:word_counter) do |input_phrase|
+require('capybara/rspec')
+require('./app.rb')
+Capybara.app = Sinatra::Application
+set(:show_expectations, false)
 
-    instance_count = 0
-
-    search_word = self.downcase()
-
-	  input_phrase_words = input_phrase.downcase().gsub(/[.,;:"'!?]/, "").split(" ")
-
-    input_phrase_words.each() do |word|
-      if word == search_word
-        instance_count += 1
-      end
-    end
-
-    instance_count
-
-	end
+describe("The path to the word_counter page", {:type => :feature}) do
+  it("Presents the user with two text forms and a submit button that leads to a page displaying the return value of word_counter when it is called using the two inputs.") do
+    visit('/')
+    fill_in("search_word", :with => "hotel")
+    fill_in("phrase_to_search", :with => "The Grand Central Hotel was a bad hotel, so we went to the Riverside Hotel.")
+    click_button("submit")
+    expect(page).to(have_content("3"))
+  end
 end

@@ -1,13 +1,13 @@
 class String
-	define_method(:word_counter) do |input_phrase|
+	define_method(:word_counter) do |phrase_to_search|
 
     instance_count = 0
 
     search_word = self.downcase()
 
-	  input_phrase_words = input_phrase.downcase().gsub(/[.,;:"'!?]/, "").split(" ")
+    phrase_to_search_words = phrase_to_search.downcase().gsub(/[.,;:"'!?]/, "").split(" ")
 
-    input_phrase_words.each() do |word|
+    phrase_to_search_words.each() do |word|
       if word == search_word
         instance_count += 1
       end
